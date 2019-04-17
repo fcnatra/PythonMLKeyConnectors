@@ -52,7 +52,7 @@ salaries_and_tenures = [
 
 for user in users:
     friends = ( friend['name'] for friend in user['friends'] )
-    print( user['name'] + '\'s friends:   \t(%s)' % ', '.join(map(str, friends)))
+    print( '[' + str( user['id'] ) + '] ' + user['name'] + '\'s friends:   \t(%s)' % ', '.join(map(str, friends)))
 
 def number_of_friends( user ):
     return len( user['friends'])
@@ -102,7 +102,10 @@ def who_has_most_common_interest_with(user):
         for interest in interests_by_userId[user['id']]
         for interested_userId in user_ids_by_interest[interest]
         if interested_userId != user['id'])
-    
-print( 'Data scientists who like \'machine learning\': ' + str( data_scientists_who_like( 'machine learning' ) ) )
 
-print( 'Data scientist with more interest in common with ' + users[3]['name'] + ': ' + str( who_has_most_common_interest_with( users[3] ) ) )
+users_interested_inML_byId = data_scientists_who_like( 'machine learning' )
+print( 'Data scientists who like \'machine learning\': ' + str( users_interested_inML_byId ) )
+
+userId = users_interested_inML_byId[0]
+others_with_common_interests_with_userId = who_has_most_common_interest_with( users[userId] )
+print( 'Data scientist with interest in ML in common with ' + users[userId]['name'] + ': ' + str( others_with_common_interests_with_userId ) )
