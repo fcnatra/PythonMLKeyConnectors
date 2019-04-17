@@ -109,3 +109,5 @@ print( 'Data scientists who like \'machine learning\': ' + str( users_interested
 userId = users_interested_inML_byId[0]
 others_with_common_interests_with_userId = who_has_most_common_interest_with( users[userId] )
 print( 'Data scientist with interest in ML in common with ' + users[userId]['name'] + ': ' + str( others_with_common_interests_with_userId ) )
+
+#let's get the average salary for each experience
