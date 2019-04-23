@@ -1,3 +1,4 @@
+from __future__ import division
 from collections import Counter
 from collections import defaultdict
 
@@ -61,6 +62,7 @@ total_connections = sum( number_of_friends( user) for user in users )
 number_of_users = len(users)
 average_connections = total_connections / number_of_users
 number_of_friends_byId = [( user['id'], number_of_friends( user ), user['name'] ) for user in users ]
+number_of_friends_byId = sorted( number_of_friends_byId, key = lambda list: list[1], reverse = True )
 
 print( 'Number of connections per user sorted by connections (desc): ' + str(number_of_friends_byId))
 print( 'Average of connections: ' + str(average_connections) )
@@ -109,6 +111,15 @@ userId = users_interested_inML_byId[0]
 others_with_common_interests_with_userId = who_has_most_common_interest_with( users[userId] )
 print( 'Data scientist with interest in ML in common with ' + users[userId]['name'] + ': ' + str( others_with_common_interests_with_userId ) )
 
+print( '\nMost common interests: ')
+words_and_counts = Counter( word
+                        for user, interest in interests
+                        for word in interest.lower().split() )
+for word, count in sorted( words_and_counts.most_common(), key = lambda list: list[1], reverse = True ):
+        if count > 1:
+                print( word, count )
+
+print( '\n' )
 #let's get the average salary for each experience
 #keys are the years (tenure) and values are the list of salaries for each tenure
 salary_by_tenure = defaultdict(list)
