@@ -61,7 +61,6 @@ total_connections = sum( number_of_friends( user) for user in users )
 number_of_users = len(users)
 average_connections = total_connections / number_of_users
 number_of_friends_byId = [( user['id'], number_of_friends( user ), user['name'] ) for user in users ]
-number_of_friends_byId = sorted( number_of_friends_byId, key = lambda list: list[1], reverse = True )
 
 print( 'Number of connections per user sorted by connections (desc): ' + str(number_of_friends_byId))
 print( 'Average of connections: ' + str(average_connections) )
@@ -111,3 +110,32 @@ others_with_common_interests_with_userId = who_has_most_common_interest_with( us
 print( 'Data scientist with interest in ML in common with ' + users[userId]['name'] + ': ' + str( others_with_common_interests_with_userId ) )
 
 #let's get the average salary for each experience
+#keys are the years (tenure) and values are the list of salaries for each tenure
+salary_by_tenure = defaultdict(list)
+for salary, tenure in salaries_and_tenures:
+        salary_by_tenure[tenure].append(salary)
+average_salary_by_tenure = {
+        tenure: sum(salaries) / len(salaries)
+        for tenure, salaries in salary_by_tenure.items()
+}
+
+print( average_salary_by_tenure )
+
+#bucketing the tenures and getting the average
+def tenure_bucket(tenure):
+        if tenure < 2: return "less than two"
+        elif tenure < 5: return "between two and five"
+        else: return "more than five"
+
+salary_by_tenure_bucket = defaultdict(list)
+
+for salary, tenure in salaries_and_tenures:
+        bucket = tenure_bucket(tenure)
+        salary_by_tenure_bucket[bucket].append(salary)
+
+average_salary_by_bucket = {
+        tenure_bucket : sum(salaries) / len(salaries)
+        for tenure_bucket, salaries in salary_by_tenure_bucket.items()
+}
+
+print ( average_salary_by_bucket )
