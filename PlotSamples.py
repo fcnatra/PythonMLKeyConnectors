@@ -49,7 +49,7 @@ def scatter_test():
     plt.scatter(sizeInWorkers, averageExpertise)
     for company, workers, expertise in zip(companies, sizeInWorkers, averageExpertise):
         plt.annotate(company, xy=(workers, expertise), xytext = (5, -5), textcoords = 'offset points')
-    plt.title( ' QA on companies' )
+    plt.title( ' Expertise on companies' )
     plt.xlabel( 'Size (workers)' )
     plt.ylabel( 'Average expertise' )
     plt.show()
@@ -66,19 +66,26 @@ def vector_test():
 
     origin = [0], [0]
     plt.quiver( *origin, vectors[:,0], vectors[:,1], color=['r','b','g'], scale=20 )
+    plt.title("Quiver")
     plt.show()
 
     plt.quiver( vectors[:,0], vectors[:,1], color=['r','b','g'], scale=20 )
+    plt.title("Quiver")
     plt.show()
 
     plt.quiver( vectors[:,1], vectors[:,1], color=['r','b','g'], scale=20 )
+    plt.title("Quiver")
     plt.show()
 
     plt.plot( vectors )
+    plt.title("Plot")
     plt.show()
 
     other_vector = vector_sum( vectors )
     print( 'Other vector: ' )
     print( other_vector )
 
+line_chart()
+scatter_plots()
+scatter_test()
 vector_test()
