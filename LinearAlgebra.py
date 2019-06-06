@@ -1,13 +1,11 @@
 from __future__ import division
-from matplotlib import pyplot as plt
-import numpy as np
 import functools
 import math
 
 def vector_add(v, w):
     return [v_i + w_i for v_i, w_i in zip(v,w)]
 
-def vector_substract(v, w):
+def vector_subtract(v, w):
     return [v_i - w_i for v_i, w_i in zip(v, w)]
 
 def vector_sum(vectors):
@@ -31,39 +29,9 @@ def sum_of_squares(vectors):
 def magnitude(vectors):
     return math.sqrt(sum_of_squares(vectors))
 
-def vector_test():
-    #VECTORS
-    vectors = np.array( [ [1, 2], [2, 1], [3, 3] ] )
+def squared_distance(v, w):
+    """(v_1 - w_1) ** 2 + ... + (v_n - w_n) ** 2"""
+    return sum_of_squares(vector_subtract(v, w))
 
-    origin = [0], [0]
-    plt.quiver(*origin, vectors[:,0], vectors[:,1], color=['r','b','g'], scale=20)
-    plt.title("Quiver with origin")
- 
-    plt.quiver( vectors[:,0], vectors[:,1], color=['r','b','g'], scale=20 )
-    plt.title("Quiver without origin")
- 
-    plt.quiver( vectors[:,1], vectors[:,1], color=['r','b','g'], scale=20 )
-    plt.title("Quiver without origin starting on vector one")
- 
-    plt.plot( vectors )
-    plt.title("Plot al vectors")
-    plt.show()
-
-    print(f'Original vector: {vectors}')
-
-    print(f'Reducing the vector: {vector_sum( vectors )}')
-
-    double_vector = scalar_multiply(2, vectors)
-    print(f'Multiplying each vector element by 2 {double_vector}')
-
-    print(f'This is the mean of the vectors: {vector_mean(vectors)}')
-
-    print(f'And this is the DOT PRODUCT of two vectors (the original and the vector*2): {dot_product(vectors, double_vector)}')
-
-    print(f'Sum of squares of the original vectors: {sum_of_squares(vectors[1])}')
-
-    print(f'Sum of squares of the first element of the original vectors ({vectors[1]}): {sum_of_squares(vectors[1])}')
-
-    print(f'Magnitued of vectors: {magnitude(vectors[1])}')
-
-vector_test()
+def distance(v, w):
+    return magnitude(vector_subtract(v, w))
