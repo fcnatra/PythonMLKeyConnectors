@@ -1,4 +1,5 @@
-import LinearAlgebra as la
+import linearAlgebra as la
+import matrices as matrix
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -16,7 +17,8 @@ plt.title("Quiver without origin starting on vector one")
 
 plt.plot( vectors )
 plt.title("Plot al vectors")
-plt.show()
+# UNCOMMENT THIS LINE TO SHOW THE CHART
+# plt.show()
 
 print(f'Original vector: {vectors}')
 
@@ -35,4 +37,9 @@ print(f'Sum of squares of the first element of the original vectors ({vectors[1]
 
 print(f'Magnitued of vectors: {la.magnitude(vectors[1])}')
 
-print(f'Distance between vectors {vectors[0]} and {vectors[1]}: {la.distance(vectors, double_vector)}')
+print(f'Distance between vectors {vectors[0]} and {vectors[1]}: {la.distance(vectors[0], vectors[1])}')
+
+identity_matrix = matrix.make_matrix(5, 5, matrix.is_diagonal)
+print('Identity matrix:')
+for matrix_row in identity_matrix:
+    print(matrix_row)
